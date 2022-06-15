@@ -9,6 +9,7 @@ import MainBox from './MainBox';
 import React, {useState} from 'react';
 import aShoesData from './data';
 import ShoesItem from './ShoesItem';
+import Detail from './Detail';
 import {Link, Route, Switch} from 'react-router-dom';
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
       </Route>
 
       <Route path="/detail">
-       <div> 디테일 </div>
+       <Detail/>
       </Route>
 
     </div>
