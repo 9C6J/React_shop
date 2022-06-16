@@ -1,0 +1,57 @@
+// import
+
+
+// extend  VS mixin 
+// 선택자간의 연관성이 존재한다면 extend를 사용하고, 
+// 연관성은 없지만 코드가 겹치는 선택자들이라면 mixin으로 소스코드의 중복을 없애기 위해 사용해야합니다.
+
+
+// 변수선언
+$mainColor : #ff0000;
+.red {
+    color : $mainColor;
+}
+
+@mixin set() {
+    background: #eeee;
+    padding : 20px;
+    border-radius: 5px;
+    max-width : 500px;
+    width : 100%;
+    margin : auto;
+}
+
+.my-alert{
+    @include set()
+}
+
+.my-alert2 {
+    @extend .my-alert;
+    background: #ffe591;
+}
+
+//  mixin === function
+
+.my-alert p {
+    margin-bottom: 0;
+}
+
+
+// div.container h4 {
+//     color : blue;
+// }
+
+// div.container p {
+//     color : green;
+// }
+
+// scss nesting 문법
+// div.container {
+//     h4{
+//         color : blue;
+//     }
+
+//     p{
+//         color : green;
+//     }
+// }
