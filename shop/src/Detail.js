@@ -31,11 +31,11 @@ function Detail(props){
     return(
     <div className="container">
         <CustomDivComponents>
-            <h4 className="red">Detail</h4>
+            <h4 className="red">Shoes</h4>
         </CustomDivComponents>
 
-        {sInput} <br></br>
-        <input value={sInput} onChange={(e)=>{ updateInput(e.target.value) }}/>
+        {/* {sInput} <br></br> */}
+        {/* <input value={sInput} onChange={(e)=>{ updateInput(e.target.value) }}/> */}
 
         {
             alert &&  
@@ -53,7 +53,8 @@ function Detail(props){
                 <h4 className="pt-5">{oSelectedItem.title}</h4>
                 <p>{oSelectedItem.content}</p>
                 <p>{oSelectedItem.price}</p>
-                <button className="btn btn-danger">주문하기</button>
+                <Info stock={props.stock}></Info>
+                <button className="btn btn-danger" onClick={()=>{ props.stockChange([...props.stock].map(i=>{return --i;})) }}>주문하기</button>
                 &nbsp;
                 <button className="btn btn-danger" onClick={()=>{ navigate(-1) }}>뒤로가기</button>
             </div>
@@ -62,6 +63,12 @@ function Detail(props){
     
     
     
+    )
+}
+
+function Info(props){
+    return(
+        <p>재고 : {props.stock[0]}</p>
     )
 }
 

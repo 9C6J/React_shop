@@ -14,40 +14,41 @@ export default [
         title : "Gray",
         content : "Born in States",
         price : 76000
-    },{
-        id : 3,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
-    },{
-        id : 4,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
-    },{
-        id : 5,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
-    },{
-        id : 6,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
-    },{
-        id : 7,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
-    },{
-        id : 8,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
-    },{
-        id : 9,
-        title : "Gray",
-        content : "Born in States",
-        price : 76000
     },
+    // {
+    //     id : 3,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },{
+    //     id : 4,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },{
+    //     id : 5,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },{
+    //     id : 6,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },{
+    //     id : 7,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },{
+    //     id : 8,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },{
+    //     id : 9,
+    //     title : "Gray",
+    //     content : "Born in States",
+    //     price : 76000
+    // },
 ]
