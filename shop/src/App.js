@@ -6,20 +6,23 @@ import {
 } from 'react-bootstrap';
 import './App.css';
 import MainBox from './MainBox';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import aShoesData from './data';
 import ShoesItem from './ShoesItem';
 import Detail from './Detail';
-import {Route, Routes, useNavigate} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import axios from 'axios';
+
+// Context API
+export let stockContext = React.createContext();
 
 function App() {
 
   let [shoes,shoesChange] = useState(aShoesData);
+
   let [stock, stockChange] = useState([10,11,12]);
+
   let [page, pageChange] = useState(2);
-  let navigate = useNavigate();
-  
 
   return (
     <div className="App">
@@ -39,6 +42,7 @@ function App() {
         <div>
           <MainBox />
           <div className="container">
+
             <div className="row">
               {
                 shoes.map((a,i)=>{
@@ -46,6 +50,7 @@ function App() {
                 })
               }
             </div>
+
           </div>
           <button className="btn btn-primary" onClick={()=>{
             axios.get('https://codingapple1.github.io/shop/data'+page+'.json')
@@ -98,11 +103,19 @@ function App() {
           </div>
         } />
 
-        <Route path="/detail/:id" element={<Detail  shoes={shoes}  stock={stock} stockChange={stockChange}/>} />
+        <Route path="/detail/:id" element={
+          
+        <stockContext.Provider value={stock}>
+        <Detail  shoes={shoes}  stock={stock} stockChange={stockChange}/>
+        </stockContext.Provider>
+
+        } />
       </Routes>
 
     </div>
   );
 }
+
+
 
 export default App;

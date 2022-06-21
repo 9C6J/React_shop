@@ -1,7 +1,8 @@
 import {useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
+import {stockContext} from './App.js';
 
 let CustomDivComponents = styled.div`
     padding : 20px;
@@ -18,6 +19,7 @@ function Detail(props){
     let oSelectedItem = props.shoes.find(o => o.id == id);
     let [alert,updateChanage] = useState(true);
     let [sInput,updateInput] = useState("test");
+    let stock = useContext(stockContext);
 
     useEffect(()=>{
         let fTimer = setTimeout(()=>{
@@ -53,6 +55,7 @@ function Detail(props){
                 <h4 className="pt-5">{oSelectedItem.title}</h4>
                 <p>{oSelectedItem.content}</p>
                 <p>{oSelectedItem.price}</p>
+                {stock}
                 <Info stock={props.stock}></Info>
                 <button className="btn btn-danger" onClick={()=>{ props.stockChange([...props.stock].map(i=>{return --i;})) }}>주문하기</button>
                 &nbsp;
