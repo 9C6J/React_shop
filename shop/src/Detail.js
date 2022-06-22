@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import './Detail.scss';
 import React, { useEffect, useState, useContext} from 'react';
 import {stockContext} from './App.js';
+import { Nav } from 'react-bootstrap';
+import { CSSTransition } from 'react-transition-group';
 
 let CustomDivComponents = styled.div`
     padding : 20px;
@@ -20,6 +22,8 @@ function Detail(props){
     let [alert,updateChanage] = useState(true);
     let [sInput,updateInput] = useState("test");
     let stock = useContext(stockContext);
+    let [tab,tabChanage] = useState(0);
+    let [busy,setBusy] = useState(false);
 
     useEffect(()=>{
         let fTimer = setTimeout(()=>{
@@ -62,11 +66,42 @@ function Detail(props){
                 <button className="btn btn-danger" onClick={()=>{ navigate(-1) }}>뒤로가기</button>
             </div>
         </div>
+
+        <Nav className="mt-5" variant="tabs" defaultActiveKey="/home" defaultActiveKey="link-0">
+            <Nav.Item>
+                <Nav.Link eventKey="link-0" onClick={()=>{ setBusy(false); tabChanage(0)}}>Active</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="link-1" onClick={()=>{ setBusy(false); tabChanage(1)}}>Option 2</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link eventKey="disabled" disabled>
+                Disabled
+                </Nav.Link>
+            </Nav.Item>
+        </Nav>
+
+        {/* Animation  react-transition-group*/}
+        <CSSTransition in={busy} classNames="wow" timeout={500}>
+        <TabContent tab={tab} setBusy={setBusy} />
+        </CSSTransition>
+
+
     </div>
-    
-    
-    
     )
+}
+
+function TabContent(props){
+
+    useEffect(()=>props.setBusy(true));
+    
+    if(props.tab === 0){
+        return <div>0번째</div>
+    }else if(props.tab ===1){
+        return <div>1번째</div>
+    }else if(props.tab ===2){
+        return <div>2번째</div>
+    }
 }
 
 function Info(props){
