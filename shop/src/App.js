@@ -80,7 +80,7 @@ function App() {
             <div className="row">
               {
                 shoes.map((a,i)=>{
-                  return <ShoesItem shoes={a} i={i} key={i} />
+                  return <ShoesItem shoes={a} shoesChange={shoesChange} i={i} key={i} />
                 })
               }
             </div>

@@ -19,26 +19,35 @@ function Cart(props){
                 </thead>
                 <tbody>
                     {
-                        props.state.map((o)=>{
+                        props.state.map((a,i)=>{
                             return( 
-                            <tr>
-                                <td>{ o.id }</td>
-                                <td>{ o.name }</td>
-                                <td>{ o.quan }</td>
-                                <td>{ o.quan%2==0 ? 'true' : 'false' }</td>
+                            <tr key={i}>
+                                <td>{ a.id }</td>
+                                <td>{ a.name }</td>
+                                <td>{ a.quan }</td>
+                                <td>{ a.quan%2==0 ? 'true' : 'false' }</td>
+                                <td><button onClick={()=>{ props.dispatch({type : 'addQuan', payload: {a} }) }}>+</button></td>
+                                <td><button onClick={()=>{ props.dispatch({type : 'minusQuan', payload: {a} }) }}>-</button></td> 
                             </tr>
                             )
                         })
                     }         
                 </tbody>
                 </Table>
+                {   props.bStatus &&
+                    <div className="my-alert2">
+                        <p>지금 구매하시면 신규할인 20%</p>
+                        <button onClick={()=>{props.dispatch({type:'closeAlert'})}}>닫기</button>
+                    </div>
+                }
         </div>
     )
 }
 
 function state를porops화(state){
     return {
-        state : state
+        state : state.reducer,
+        bStatus : state.reducer2
     }
 }
 

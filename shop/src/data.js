@@ -3,17 +3,21 @@ export default [
         id : 0,
         title : "White and Black",
         content : "Born in France",
-        price : 120000
+        price : 120000,
+        quantity : 5
     },{
         id : 1,
         title : "Red",
         content : "Born in Seoul",
-        price : 249000
+        price : 249000,
+        quantity : 15
+
     },{
         id : 2,
         title : "Gray",
         content : "Born in States",
-        price : 76000
+        price : 76000,
+        quantity : 2
     },
     // {
     //     id : 3,

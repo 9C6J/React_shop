@@ -5,6 +5,7 @@ import React, { useEffect, useState, useContext} from 'react';
 import {stockContext} from './App.js';
 import { Nav } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
+import {connect} from 'react-redux';
 
 let CustomDivComponents = styled.div`
     padding : 20px;
@@ -58,12 +59,25 @@ function Detail(props){
             <div className="col-md-6 mt-4">
                 <h4 className="pt-5">{oSelectedItem.title}</h4>
                 <p>{oSelectedItem.content}</p>
-                <p>{oSelectedItem.price}</p>
-                {stock}
-                <Info stock={props.stock}></Info>
-                <button className="btn btn-danger" onClick={()=>{ props.stockChange([...props.stock].map(i=>{return --i;})) }}>주문하기</button>
+                <p>가격 : {oSelectedItem.price}</p>
+                <p>재고 : {oSelectedItem.quantity}</p>
+
+                <button className="btn btn-danger" 
+                    onClick={()=>{
+                        props.stockChange([...props.stock].map(i=>{return --i;})); 
+                        props.dispatch({type: 'addItem', payload : {oSelectedItem}});
+                        
+                        let shoes = [...props.shoes].map(o => {
+                            if(o.id === oSelectedItem.id) o.quantity--;
+                            return o
+                        })
+                        navigate('/cart');
+                }}>주문하기</button>                
                 &nbsp;
-                <button className="btn btn-danger" onClick={()=>{ navigate(-1) }}>뒤로가기</button>
+                <button className="btn btn-danger" 
+                    onClick={()=>{ navigate(-1) }}>
+                뒤로가기
+                </button>
             </div>
         </div>
 
@@ -110,4 +124,10 @@ function Info(props){
     )
 }
 
-export default Detail;
+function useRedux(state){
+    return{
+        state : state.reducer
+    }
+}
+// export default Detail;
+export default connect(useRedux)(Detail);
