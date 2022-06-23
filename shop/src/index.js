@@ -24,8 +24,8 @@ let oItem = [
 // 상태변수 수정하는 방법
 // oItem = default parameter
 function reducer(state = oItem, action){
-  let target;
   let oData = [...state];
+  let target;
 
   switch(action.type){
     case 'addItem':
@@ -44,14 +44,24 @@ function reducer(state = oItem, action){
       return oData
       break;
     case 'addQuan':
-      target = action.payload.a;
-      oData.find(o=>o.id === target.id).quan++;
+      target = action.payload;
+
+      var idx = state.findIndex(o=>o.id === target);
+      // oData.find(o=>o.id === target).quan++;
+      oData[idx].quan++;
+
       return oData
       break;
     case 'minusQuan':
-      target = action.payload.a;
-      var obj = oData.find(o=>o.id === target.id);
-      if ( obj && obj.quan > 0) obj.quan --;
+      target = action.payload;
+      var idx = state.findIndex(o=>o.id === target);
+      // var obj = oData.find(o=>o.id === target);
+      if ( oData[idx] && oData[idx].quan > 0){
+        oData[idx].quan--;
+      }else{
+        delete oData[idx];
+      } 
+
       return oData
       break;
     default :

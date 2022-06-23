@@ -6,13 +6,15 @@ import {
 } from 'react-bootstrap';
 import './App.css';
 import MainBox from './MainBox';
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, lazy, Suspense} from 'react';
 import aShoesData from './data';
 import ShoesItem from './ShoesItem';
-import Detail from './Detail';
 import {Route, Routes} from 'react-router-dom';
 import Cart from './Cart';
 import axios from 'axios';
+// import Detail from './Detail';
+// es6 dynamic import 문법
+let Detail = lazy(()=> import('./Detail.js') ); 
 
 // Context API
 export let stockContext = React.createContext();
@@ -108,7 +110,9 @@ function App() {
         <Route path="/detail/:id" element={
           
         <stockContext.Provider value={stock}>
-        <Detail  shoes={shoes}  stock={stock} stockChange={stockChange}/>
+          <Suspense fallback={<div>로딩중입니다.</div>}>
+             <Detail  shoes={shoes}  stock={stock} stockChange={stockChange}/>
+          </Suspense>
         </stockContext.Provider>
 
         } />

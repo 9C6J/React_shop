@@ -25,9 +25,10 @@ function Cart(props){
                                 <td>{ a.id }</td>
                                 <td>{ a.name }</td>
                                 <td>{ a.quan }</td>
-                                <td>{ a.quan%2==0 ? 'true' : 'false' }</td>
-                                <td><button onClick={()=>{ props.dispatch({type : 'addQuan', payload: {a} }) }}>+</button></td>
-                                <td><button onClick={()=>{ props.dispatch({type : 'minusQuan', payload: {a} }) }}>-</button></td> 
+                                <td>
+                                    <button onClick={()=>{ props.dispatch({type : 'addQuan', payload: a.id }) }}>+</button>
+                                    <button onClick={()=>{ props.dispatch({type : 'minusQuan', payload: a.id }) }}>-</button>
+                                </td>
                             </tr>
                             )
                         })
