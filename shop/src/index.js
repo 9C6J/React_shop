@@ -7,11 +7,23 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 // import { HashRouter } from 'react-router-dom';
 
+import {Provider} from 'react-redux';
+import { createStore } from 'redux';
+let store = createStore(()=>{
+  return [
+    { id : 0, name : 'RedShoes', quan : 1 },
+    { id : 1, name : 'NikeShoes', quan : 4 },
+    { id : 2, name : 'AdidasShoes', quan : 5 },
+  ]
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -11,6 +11,7 @@ import aShoesData from './data';
 import ShoesItem from './ShoesItem';
 import Detail from './Detail';
 import {Route, Routes} from 'react-router-dom';
+import Cart from './Cart';
 import axios from 'axios';
 
 // Context API
@@ -33,6 +34,7 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/detail">Detail</Nav.Link>
+            <Nav.Link href="/cart">Cart</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -110,6 +112,8 @@ function App() {
         </stockContext.Provider>
 
         } />
+
+        <Route path="/cart" element={ <Cart/>} />
       </Routes>
 
     </div>
