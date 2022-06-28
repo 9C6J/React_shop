@@ -1,11 +1,18 @@
 import React, { useEffect , memo} from 'react';
 import {Table} from 'react-bootstrap';
-import {connect} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 
 // import Table : export default 가져오기
 // import {Table} : Table이라는 변수/함수 가져오기
 
 function Cart(props){
+    
+    // connect => useSelector
+    let state = useSelector((state) => state)
+    console.log(state)
+    //  dispatch => useDispatch
+    let dispatch = useDispatch();
+
     return (
         <div>
             <Table striped>
@@ -19,15 +26,16 @@ function Cart(props){
                 </thead>
                 <tbody>
                     {
-                        props.state.map((a,i)=>{
+                        // props.state.map((a,i)=>{
+                        state.reducer.map((a,i)=>{
                             return( 
                             <tr key={i}>
                                 <td>{ a.id }</td>
                                 <td>{ a.name }</td>
                                 <td>{ a.quan }</td>
                                 <td>
-                                    <button onClick={()=>{ props.dispatch({type : 'addQuan', payload: a.id }) }}>+</button>
-                                    <button onClick={()=>{ props.dispatch({type : 'minusQuan', payload: a.id }) }}>-</button>
+                                    <button onClick={()=>{ dispatch({type : 'addQuan', payload: a.id }) }}>+</button>
+                                    <button onClick={()=>{ dispatch({type : 'minusQuan', payload: a.id }) }}>-</button>
                                 </td>
                             </tr>
                             )
@@ -46,12 +54,7 @@ function Cart(props){
     )
 }
 
-function state를porops화(state){
-    return {
-        state : state.reducer,
-        bStatus : state.reducer2
-    }
-}
+
 
 function Parent(props){
     return(
@@ -73,5 +76,12 @@ let Child2 = memo(function(props){
     return <div>2222</div>
 });
 
-export default connect(state를porops화)(Cart)
-// export default Cart;
+//  useSelector 로 대체 가능
+// function state를porops화(state){
+//     return {
+//         state : state.reducer,
+//         bStatus : state.reducer2
+//     }
+// }
+// export default connect(state를porops화)(Cart)
+export default Cart;
