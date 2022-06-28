@@ -25,15 +25,27 @@ function Detail(props){
     let stock = useContext(stockContext);
     let [tab,tabChanage] = useState(0);
     let [busy,setBusy] = useState(false);
+    let [recentlyItem,recentlyChange] = useState([]);
 
     useEffect(()=>{
         let fTimer = setTimeout(()=>{
             updateChanage(false);
         },2000);
-
         // Detail Component 가 Unmount 될때 실행됨
         return ()=>{ clearTimeout(fTimer)}
     },[]);
+
+   useEffect(()=>{
+        var arr = localStorage.getItem('watched');
+        if ( arr == null ) { arr = []} else {arr = JSON.parse(arr);}
+
+        arr.push(id);
+        arr = new Set(arr);
+        arr = [...arr];
+        recentlyChange(arr);
+
+        localStorage.setItem('watched',JSON.stringify(arr));
+   },[]);
 
     return(
     <div className="container">
@@ -52,11 +64,11 @@ function Detail(props){
         }
 
         <div className="row">
-            <div className="col-md-6 ">
+            <div className="col-md-5 ">
                 <img src={"https://codingapple1.github.io/shop/shoes"+(oSelectedItem.id+1)+".jpg"} width="100%"/>
             </div>
             
-            <div className="col-md-6 mt-4">
+            <div className="col-md-5 mt-4">
                 <h4 className="pt-5">{oSelectedItem.title}</h4>
                 <p>{oSelectedItem.content}</p>
                 <p>가격 : {oSelectedItem.price}</p>
@@ -78,6 +90,18 @@ function Detail(props){
                     onClick={()=>{ navigate(-1) }}>
                 뒤로가기
                 </button>
+            </div>
+
+            <div className="col-md-2 mt-4">
+                최근본상품
+                {
+                    recentlyItem.map(i=>{
+                        return <div>
+                            <img src={"https://codingapple1.github.io/shop/shoes"+(parseInt(i)+1)+".jpg"} width="100%"/>
+                        </div>
+                    })
+                }
+                    
             </div>
         </div>
 

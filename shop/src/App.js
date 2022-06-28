@@ -92,9 +92,6 @@ function App() {
             .then((result)=>{
               console.log(result.data);
               let oData = result.data;
-              // let aShoes = [...shoes];
-              // oData.forEach(o=>{aShoes.push(o)})
-              // shoesChange(aShoes);
               shoesChange([...shoes, ...oData]); 
               pageChange(++page);
             }) //성공
