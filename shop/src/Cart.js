@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect , memo} from 'react';
 import {Table} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
@@ -41,6 +41,7 @@ function Cart(props){
                         <button onClick={()=>{props.dispatch({type:'closeAlert'})}}>닫기</button>
                     </div>
                 }
+            <Parent name="cha" age="27"/>
         </div>
     )
 }
@@ -51,6 +52,26 @@ function state를porops화(state){
         bStatus : state.reducer2
     }
 }
+
+function Parent(props){
+    return(
+        <div>
+            <Child1 name={props.name}/>
+            <Child2 age={props.age}/>
+        </div>
+    )
+}
+
+function Child1(props){
+    useEffect(()=>{console.log('렌더링1')});
+    return <div>1111</div>
+}
+
+// memo : 기존 props VS 바뀐 props 비교연산후 컴포넌트 업데이트 결정
+let Child2 = memo(function(props){
+    useEffect(()=>{console.log('렌더링2')});
+    return <div>2222</div>
+});
 
 export default connect(state를porops화)(Cart)
 // export default Cart;
